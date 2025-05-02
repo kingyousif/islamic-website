@@ -38,7 +38,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 142.1 70.0% 45.3%;
+    --primary: 142.1 70% 45.3%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -70,7 +70,8 @@
 
   /* Ensure theme transitions are smooth */
   * {
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, border-radius 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease,
+      border-color 0.2s ease, border-radius 0.2s ease;
   }
 
   /* Improve dark mode contrast */
@@ -80,14 +81,14 @@
   }
 
   /* Font classes */
-  .font-arabic {
+  /* .font-arabic {
     font-family: var(--font-arabic), var(--font-sans);
-  }
+  } */
 
   /* RTL specific styles */
-  [dir="rtl"] {
+  /* [dir="rtl"] {
     font-family: var(--font-arabic), var(--font-sans);
-  }
+  } */
 
   /* Custom button styling */
   .btn,
@@ -96,6 +97,16 @@
   [class*="button-"] {
     border-radius: var(--custom-button-radius);
   }
+}
+
+@font-face {
+  font-family: "NRT";
+  src: url("public/fonts/NRT-Reg.ttf") format("truetype");
+}
+
+.font-nrt {
+  font-family: "NRT" !important;
+  font-weight: 100;
 }
 
 /* Apply custom button radius to shadcn components */
