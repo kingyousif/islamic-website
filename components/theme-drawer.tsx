@@ -76,6 +76,7 @@ export function ThemeDrawer() {
     { value: "default", label: t("defaultFont") },
     { value: "serif", label: t("serifFont") },
     { value: "mono", label: t("monoFont") },
+    { value: "nrt", label: t("nrt") },
   ];
 
   const handleFontChange = (value: string) => {
@@ -84,11 +85,21 @@ export function ThemeDrawer() {
     if (value === "serif") {
       document.documentElement.classList.add("font-serif");
       document.documentElement.classList.remove("font-mono");
+      document.documentElement.classList.remove("font-nrt");
     } else if (value === "mono") {
       document.documentElement.classList.add("font-mono");
       document.documentElement.classList.remove("font-serif");
+      document.documentElement.classList.remove("font-nrt");
+    } else if (value === "nrt") {
+      document.documentElement.classList.add("font-nrt");
+      document.documentElement.classList.remove("font-serif");
+      document.documentElement.classList.remove("font-mono");
     } else {
-      document.documentElement.classList.remove("font-serif", "font-mono");
+      document.documentElement.classList.remove(
+        "font-serif",
+        "font-mono",
+        "font-nrt"
+      );
     }
   };
 

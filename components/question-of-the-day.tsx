@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
@@ -19,20 +19,20 @@ export function QuestionOfTheDay() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-
+  const [questionIndex, setQuestionIndex] = useState(0); // State for question rotatio
   // Get today's date to show a consistent question for the day
   const today = new Date().toISOString().split("T")[0];
+  const [tryagain, setTryagain] = useState(false);
 
-  // Use the date to determine which question to show (simple rotation through questions)
-  const dayOfYear = Math.floor(
-    (new Date().getTime() -
-      new Date(new Date().getFullYear(), 0, 0).getTime()) /
-      86400000
-  );
-  const questionIndex = dayOfYear % 5; // Rotate through 5 questions
-
+  useEffect(() => {
+    if (questionIndex >= 4) {
+      setQuestionIndex(0);
+    } else {
+      setQuestionIndex((prev) => prev + 1);
+    }
+  }, [tryagain]);
   const question = t(`questionOfDay${questionIndex + 1}`);
-  // const explanation = t(`questionOfDayExplanation${questionIndex + 1}`);
+  const explanation = t(`questionOfDay${questionIndex + 1}Explanation`);
 
   const answers: Answer[] = [
     {
@@ -70,6 +70,7 @@ export function QuestionOfTheDay() {
   const handleReset = () => {
     setSelectedAnswer(null);
     setIsSubmitted(false);
+    setTryagain((prev) => !prev);
   };
 
   return (
@@ -81,7 +82,7 @@ export function QuestionOfTheDay() {
         <div className="relative">
           <div className="mb-2 flex items-center">
             <HelpCircle className="mr-2 h-5 w-5 text-secondary" />
-            <p className="text-sm font-medium text-secondary">{today}</p>
+            <p className="text-sm font-medium ms-2">{today}</p>
           </div>
 
           <h3 className="mb-6 font-arabic text-2xl font-bold">{question}</h3>
@@ -138,6 +139,7 @@ export function QuestionOfTheDay() {
               <h4 className="mb-2 font-arabic font-bold">
                 {isCorrect ? t("correctAnswer") : t("incorrectAnswer")}
               </h4>
+              <p className="font-arabic text-muted-foreground">{explanation}</p>
             </motion.div>
           )}
 
