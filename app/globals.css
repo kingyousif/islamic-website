@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+
+    /* Custom theme variables with defaults */
+    --custom-text: #0f172a;
+    --custom-button-color: #22c55e;
+    --custom-button-radius: 8px;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142.1 70.0% 45.3%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 76.2% 36.3%;
+
+    /* Custom theme variables with dark mode defaults */
+    --custom-text: #f8fafc;
+    --custom-button-color: #22c55e;
+    --custom-button-radius: 8px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    color: var(--custom-text);
+  }
+
+  /* Ensure theme transitions are smooth */
+  * {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, border-radius 0.2s ease;
+  }
+
+  /* Improve dark mode contrast */
+  .dark body {
+    @apply bg-background text-foreground;
+    color: var(--custom-text);
+  }
+
+  /* Font classes */
+  .font-arabic {
+    font-family: var(--font-arabic), var(--font-sans);
+  }
+
+  /* RTL specific styles */
+  [dir="rtl"] {
+    font-family: var(--font-arabic), var(--font-sans);
+  }
+
+  /* Custom button styling */
+  .btn,
+  .button,
+  button[class*="btn-"],
+  [class*="button-"] {
+    border-radius: var(--custom-button-radius);
+  }
+}
+
+/* Apply custom button radius to shadcn components */
+.rounded-md,
+.rounded-lg,
+.rounded-xl {
+  border-radius: var(--custom-button-radius);
+}
+
+/* Override button styles */
+.btn-primary,
+.bg-primary,
+button[class*="bg-primary"] {
+  background-color: var(--custom-button-color);
+}
+
+/* Make color inputs more visible and usable */
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
